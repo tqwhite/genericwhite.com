@@ -1,0 +1,9 @@
+{{getGrid}}
+{{#if dataIsResolved}}
+	<hr/>
+	{{#each bookmarkGrid}}
+	{{#each grids}}
+		{{showGrid(.)}}
+	{{/each}}
+	{{/each}}
+{{/if}}

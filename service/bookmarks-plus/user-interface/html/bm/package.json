@@ -1,0 +1,27 @@
+{
+  "name": "bookmarks-plus-ui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "can": "^3.3.0",
+    "can-connect": "^1.0.21",
+    "can-define": "^1.0.10",
+    "can-list": "^3.0.2",
+    "jquery": "^3.1.1",
+    "steal": "^1.0.7",
+    "steal-stache": "^3.0.4"
+  },
+  "devDependencies": {
+    "steal-less": "^1.0.1",
+    "steal-tools": "^1.0.1"
+  },
+    "steal":{
+        "plugins": ["steal-less"]
+    },
+  "scripts": {
+    "build": "steal-tools"
+  },
+  "author": "TQ White II",
+  "license": "ISC"
+}

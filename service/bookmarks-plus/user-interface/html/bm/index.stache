@@ -1,0 +1,29 @@
+<div class='distributeHorizontally'>
+
+	<div class='status'>{{appStatus}}</div>
+	
+	<div style='position:relative;'>
+	{{#if tokenClaims.username}}
+		{{tokenClaims.username}}
+			{{/if}}
+	</div>
+	
+	<div>
+		<can-import from="components/account/login/login"/>
+		<account-login
+			root-vm='{.}'
+			/>
+	</div>
+	
+</div>
+
+<div style='position:relative;'>
+	{{#if tokenClaims.username}}
+		<can-import from="components/bookmarks/grid/grid"/>
+		<bookmarks-grid
+			root-vm='{.}'
+		/>
+	{{#else}}
+		You are not logged in.
+	{{/if}}
+</div>

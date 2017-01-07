@@ -1,0 +1,10 @@
+
+<form ($submit)="getToken(%event, %element)" action=""> 
+<div class='distributeHorizontally'>
+
+<input {($value)}="user.username" value='tqwhite'/><br/>
+<input {($value)}="user.password" value='shairWord!0'/>
+
+<button type='submit'>get token</button>
+</div>
+</form>

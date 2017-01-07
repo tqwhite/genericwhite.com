@@ -1,0 +1,18 @@
+{
+  "name": "genericwhite",
+  "version": "1.0.0",
+  "description": "initializer for Generic White ",
+  "main": "startAll.js",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "multi-ini": "^0.5.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "TQ White II",
+  "license": "ISC"
+}

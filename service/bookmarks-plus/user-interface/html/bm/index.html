@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=UTF-8'>
+	<title>Bookmarks Plus</title>
+	<script>
+	var environment='production';
+	if(document.cookie.match(/environment=development/)){
+		environment='development'; //anything else loads /dist compiled version
+	}
+	var lt='<';
+	var gt='>';
+	document.write(lt+"script type='text/javascript' src='node_modules/steal/steal.js' env='"+environment+"' main='bookmarks-plus-ui/app'"+gt+lt+"/script"+gt);
+	</script>
+</head>
+<body>
+</body>
+</html>

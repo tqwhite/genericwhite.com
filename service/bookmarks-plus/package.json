@@ -1,0 +1,11 @@
+{
+  "name": "bookmarks-plus",
+  "version": "1.0.0",
+  "description": "Bookmark manager with grid and other idiosyncrasies",
+  "main": "bookmarks-plus.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "TQ White II",
+  "license": "ISC"
+}
