@@ -1,5 +1,5 @@
 		<div class='gridContainer'>
-	{{#each bookmarkGrid.value}}
+	{{#each userBookmarks.value}}
 	
 
 			

@@ -7,7 +7,7 @@ import qtools from 'node_modules/qtools-minus/';
 
 import './bookmarks.less';
 import template from './bookmarks.stache!steal-stache';
-import BookmarkGrid from 'models/bookmarkGrid/connector'
+import UserBookmarks from 'models/bookmarkGrid/connector'
 
 
 export const viewModel = Map.extend({
@@ -15,9 +15,9 @@ export const viewModel = Map.extend({
 		message: {
 			value: 'hello from bookmarks-grid'
 		},
-		bookmarkGrid:{
+		userBookmarks:{
 			value:function(){
-				const list=new BookmarkGrid.getList();
+				const list=new UserBookmarks.getList();
 				return list;
 			}
 		
@@ -27,7 +27,7 @@ export const viewModel = Map.extend({
 		}
 	},
     setDefaultGrid:function(){
-	this.bookmarkGrid.then((grids)=>{
+	this.userBookmarks.then((grids)=>{
 	const simpleGrid=grids[0].attr();
     	if (!this.attr('visibleGridRefId')){
     		this.attr('visibleGridRefId', simpleGrid.defaultGridRefId);
