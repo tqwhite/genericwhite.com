@@ -1,4 +1,7 @@
-<div class='distributeHorizontally'>
+
+	{{#unless tokenClaims.username}}
+	
+	<div class='distributeHorizontally'>
 
 	<div class='status'>{{appStatus}}</div>
 	
@@ -16,6 +19,7 @@
 	</div>
 	
 </div>
+{{/if}}
 
 <div style='position:relative;'>
 	{{#if tokenClaims.username}}

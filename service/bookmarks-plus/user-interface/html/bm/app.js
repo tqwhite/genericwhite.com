@@ -7,8 +7,7 @@ import stache from 'can/view/stache/stache';
 import './styles.less';
 import template from './index.stache!steal-stache';
 
-var viewModel = new Map({
-	message: "Hello World",
+export const viewModel = new Map({
 	appStatus: "Startup Ok",
 	tokenClaims: function() {
 		const parts = document.cookie.split(/;/);
@@ -27,6 +26,6 @@ var viewModel = new Map({
 
 
 $(() => {
-console.log('hello');
   $('body').append(template(viewModel));
 });
+

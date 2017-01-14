@@ -32,7 +32,9 @@ var viewModel = Map.extend({
     	user.save()
     	.then((result)=>{
 			this.attr('rootVm').attr('appStatus', `Good login ${result.username}`);
-
+			setTimeout(()=>{
+				window.location.reload();
+			}, 300);
 
     	}, (err)=>{
 			this.attr('rootVm').attr('appStatus', err.responseJSON.errorText);

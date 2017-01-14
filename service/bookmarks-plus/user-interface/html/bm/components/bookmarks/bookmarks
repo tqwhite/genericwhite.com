@@ -1,0 +1,5 @@
+bookmarks
+		<can-import from="components/bookmarks/grid/grid"/>
+		<bookmarks-grid
+			root-vm='{.}'
+		/>

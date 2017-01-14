@@ -3,7 +3,7 @@
 <div class='distributeHorizontally'>
 
 <input {($value)}="user.username" value='tqwhite'/><br/>
-<input {($value)}="user.password" value='shairWord!0'/>
+<input type='password' {($value)}="user.password" value='shairWord!0'/>
 
 <button type='submit'>get token</button>
 </div>
