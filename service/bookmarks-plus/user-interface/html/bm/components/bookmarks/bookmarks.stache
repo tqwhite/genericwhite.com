@@ -1,6 +1,21 @@
+{{setDefaultGrid}}
 
+	
+{{#if bookmarkGrid.isResolved}}
+	{{#each bookmarkGrid.value}}
+		<div class='gridTitle'>
+		{{#each grids}}
+				<span class='gridButton {{#is refId visibleGridRefId}}highlight{{/is}}' ($click)='chooseGrid(refId)'>{{name}}</span>
+	
+		{{/each}}
+		</div>	
+	{{/each}}
+		
+		
 		<can-import from="components/bookmarks/grid/grid"/>
 		<bookmarks-grid
 			root-vm='{.}'
 			bookmark-grid='{bookmarkGrid}'
+			visible-grid-ref-id='{visibleGridRefId}'
 		/>
+{{/if}}

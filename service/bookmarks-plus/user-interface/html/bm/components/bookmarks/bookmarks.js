@@ -14,7 +14,45 @@ export const viewModel = Map.extend({
 	define: {
 		message: {
 			value: 'hello from bookmarks-grid'
+		},
+		bookmarkGrid:{
+			value:function(){
+				const list=new BookmarkGrid.getList();
+				return list;
+			}
+		
+		},
+		visibleGridRefId:{
+			
 		}
+	},
+    setDefaultGrid:function(){
+	this.bookmarkGrid.then((grids)=>{
+	const simpleGrid=grids[0].attr();
+    	if (!this.attr('visibleGridRefId')){
+    		this.attr('visibleGridRefId', simpleGrid.defaultGridRefId);
+    	}
+});
+    },
+
+	gridManagerList: {},
+	showGrid: function(gridElement) {
+		if (!this.gridManagerList[gridElement.refId]) {
+			this.gridManagerList[gridElement.refId] = new gridGenerator(gridElement, qtools);
+		}
+		return this.gridManagerList[gridElement.refId].renderGrid('mainGrid')
+	},
+    chooseGrid:function(gridRefId){
+    
+		this.attr('visibleGridRefId', gridRefId);
+
+
+    },
+
+	testElement: function() {
+		console.dir({
+			"this": this.attr()
+		});
 	}
 });
 

@@ -1,14 +1,7 @@
-{{#if bookmarkGrid.isResolved}}
-	{{setDefaultGrid}}
 		<div class='gridContainer'>
 	{{#each bookmarkGrid.value}}
 	
-	<div class='gridTitle'>
-	{{#each grids}}
-			<span class='gridButton {{#is refId visibleGridRefId}}highlight{{/is}}' ($click)='chooseGrid(refId)'>{{name}}</span>
-	
-	{{/each}}
-	</div>
+
 			
 	{{#each grids}}
 		{{#is refId visibleGridRefId}}
@@ -17,4 +10,3 @@
 	{{/each}}
 	{{/each}}
 		</div>
-{{/if}}

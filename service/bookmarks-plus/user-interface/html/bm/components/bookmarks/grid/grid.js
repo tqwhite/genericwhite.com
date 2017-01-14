@@ -7,7 +7,6 @@ import qtools from 'node_modules/qtools-minus/';
 
 import './grid.less';
 import template from './grid.stache!steal-stache';
-import BookmarkGrid from 'models/bookmarkGrid/connector'
 
 import gridGenerator from 'node_modules/grid-manager/';
 
@@ -24,38 +23,8 @@ export const viewModel = Map.extend({
 		},
 		dataIsResolved: {
 			value: false
-		},
-		bookmarkGrid:{
-			value:function(){
-				const list=new BookmarkGrid.getList();
-				return list;
-			}
-		
-		},
-		visibleGridRefId:{
-			
 		}
 	},
-    setDefaultGrid:function(){
-	this.bookmarkGrid.then((grids)=>{
-	const simpleGrid=grids[0].attr();
-    	if (!this.attr('visibleGridRefId')){
-console.log("simpleGrid.defaultGridRefId="+simpleGrid.defaultGridRefId);
-
-
-    		this.attr('visibleGridRefId', simpleGrid.defaultGridRefId);
-    	}
-});
-
-
-
-    },
-    chooseGrid:function(gridRefId){
-    
-		this.attr('visibleGridRefId', gridRefId);
-
-
-    },
 	getAnchor: function(position) {
 		return `${position.row} ${position.column}`
 	},
