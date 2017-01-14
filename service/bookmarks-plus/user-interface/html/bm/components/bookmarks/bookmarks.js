@@ -5,8 +5,8 @@ import 'can/map/define/';
 import stache from 'can/view/stache/stache';
 import qtools from 'node_modules/qtools-minus/';
 
-import './grid.less';
-import template from './grid.stache!steal-stache';
+import './bookmarks.less';
+import template from './bookmarks.stache!steal-stache';
 import BookmarkGrid from 'models/bookmarkGrid/connector'
 
 
@@ -14,7 +14,9 @@ export const viewModel = Map.extend({
 	define: {
 		message: {
 			value: 'hello from bookmarks-grid'
-		}}});
+		}
+	}
+});
 
 Component.extend({
 	tag: "bookmarks",

@@ -23,8 +23,8 @@
 
 <div style='position:relative;'>
 	{{#if tokenClaims.username}}
-		<can-import from="components/bookmarks/grid/grid"/>
-		<bookmarks-grid
+		<can-import from="components/bookmarks/bookmarks"/>
+		<bookmarks
 			root-vm='{.}'
 		/>
 	{{#else}}
