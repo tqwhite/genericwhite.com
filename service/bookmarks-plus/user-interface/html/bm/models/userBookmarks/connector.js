@@ -5,12 +5,12 @@ import 'can/map/define/define';
 import 'can/list/list';
 
 
-export const BookmarkGrid = can.Map.extend({
+export const UserBookmarks = can.Map.extend({
   define: {}
 });
 
-BookmarkGrid.List = can.List.extend({
-  Map: BookmarkGrid
+UserBookmarks.List = can.List.extend({
+  Map: UserBookmarks
 }, {});
 
 
@@ -34,13 +34,13 @@ export const userConnection = superMap({
 	},
   url: '/bm/api/bookmarkGrid',
   idProp: '_id',
-  Map: BookmarkGrid,
-  List: BookmarkGrid.List,
-  name: 'bookmark-grid'
+  Map: UserBookmarks,
+  List: UserBookmarks.List,
+  name: 'user-bookmarks'
 });
 
-tag('bookmark-grid-model', userConnection);
+tag('user-bookmarks-model', userConnection);
 
-export default BookmarkGrid;
+export default UserBookmarks;
 
 

@@ -7,7 +7,7 @@ import qtools from 'node_modules/qtools-minus/';
 
 import './bookmarks.less';
 import template from './bookmarks.stache!steal-stache';
-import UserBookmarks from 'models/bookmarkGrid/connector'
+import UserBookmarks from 'models/userBookmarks/connector'
 
 
 export const viewModel = Map.extend({
