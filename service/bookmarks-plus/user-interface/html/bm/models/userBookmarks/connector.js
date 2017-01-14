@@ -32,7 +32,7 @@ export const userConnection = superMap({
 
 		return inDataItem.data;
 	},
-  url: '/bm/api/bookmarkGrid',
+  url: '/bm/api/userBookmarks',
   idProp: '_id',
   Map: UserBookmarks,
   List: UserBookmarks.List,
