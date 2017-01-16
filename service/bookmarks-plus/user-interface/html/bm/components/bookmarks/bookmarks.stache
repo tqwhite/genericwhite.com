@@ -1,21 +1,21 @@
-{{setDefaultGrid}}
 
-	
-{{#if userBookmarks.isResolved}}
-	{{#each userBookmarks.value}}
+{{#if userBookmarks.isResolved}}{{setDefaultGrid}}
 		<div class='gridTitle'>
+	{{#each userBookmarks.value}}
 		{{#each grids}}
 				<span class='gridButton {{#is refId visibleGridRefId}}highlight{{/is}}' ($click)='chooseGrid(refId)'>{{name}}</span>
-	
 		{{/each}}
-		</div>	
 	{{/each}}
-		
-		
+	<span class='gridButton {{#editMode}}editorActive{{/editMode}}' ($click)='toggleEditMode()'>
+						{{^editMode}}Edit Bookmarks{{/editMode}}
+						{{#editMode}}Stop Editing{{/editMode}}
+						</span>
+		</div>
 		<can-import from="components/bookmarks/grid/grid"/>
 		<bookmarks-grid
 			root-vm='{.}'
 			user-bookmarks='{userBookmarks}'
 			visible-grid-ref-id='{visibleGridRefId}'
+			edit-mode='{editMode}'
 		/>
 {{/if}}

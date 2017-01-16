@@ -1,15 +1,14 @@
-import can from 'can';
 import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
-import 'can/map/define/define';
-import 'can/list/list';
+import List from 'can-list';
+import Map from 'can-map';
 
 
-export const User = can.Map.extend({
+export const User = Map.extend({
   define: {}
 });
 
-User.List = can.List.extend({
+User.List = List.extend({
   Map: User
 }, {});
 

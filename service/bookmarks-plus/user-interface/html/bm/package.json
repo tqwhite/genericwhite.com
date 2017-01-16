@@ -8,8 +8,10 @@
     "can-connect": "^1.0.21",
     "can-construct": "^3.0.6",
     "can-define": "^1.0.10",
+    "can-jquery": "^3.0.3",
     "can-list": "^3.0.2",
     "can-map": "^3.0.4",
+    "can-stache-bindings": "^3.0.6",
     "jquery": "^3.1.1",
     "steal": "^1.0.7",
     "steal-stache": "^3.0.4"

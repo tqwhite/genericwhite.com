@@ -1,8 +1,10 @@
-import $ from 'jquery'; //looks for projects in node_modules
-import Component from 'can/component/';
-import Map from 'can/map/';
-import 'can/map/define/';
-import stache from 'can/view/stache/stache';
+import $ from 'can-jquery'; //looks for projects in node_modules
+import Component from 'can-component';
+import Map from 'can-map';
+import 'can-define';
+import stache from 'can-stache';
+import 'can-stache-bindings';
+import qtools from 'node_modules/qtools-minus/';
 
 import template from './login.stache!steal-stache';
 import User from 'models/user/connector'

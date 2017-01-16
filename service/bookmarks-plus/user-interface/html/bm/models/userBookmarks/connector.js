@@ -1,15 +1,14 @@
-import can from 'can';
 import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
-import 'can/map/define/define';
-import 'can/list/list';
+import List from 'can-list';
+import Map from 'can-map';
 
 
-export const UserBookmarks = can.Map.extend({
+export const UserBookmarks = Map.extend({
   define: {}
 });
 
-UserBookmarks.List = can.List.extend({
+UserBookmarks.List = List.extend({
   Map: UserBookmarks
 }, {});
 
