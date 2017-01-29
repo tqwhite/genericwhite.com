@@ -1,7 +1,7 @@
 <button ($click)='testElement("x")' style='margin-left:20px;' tabindex='-1'>test bookmarks-grid</button>
 
 		<div class='gridContainer'>
-	{{#each userBookmarks.value}}
+	{{#each bookmarks.value}}
 	
 
 			

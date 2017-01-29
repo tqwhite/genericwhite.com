@@ -4,12 +4,12 @@ import List from 'can-list';
 import Map from 'can-map';
 
 
-export const UserBookmarks = Map.extend({
+export const Bookmarks = Map.extend({
   define: {}
 });
 
-UserBookmarks.List = List.extend({
-  Map: UserBookmarks
+Bookmarks.List = List.extend({
+  Map: Bookmarks
 }, {});
 
 
@@ -31,15 +31,15 @@ export const userConnection = superMap({
 
 		return inDataItem.data;
 	},
-  url: '/bm/api/userBookmarks',
+  url: '/bm/api/bookmarks',
   idProp: '_id',
-  Map: UserBookmarks,
-  List: UserBookmarks.List,
-  name: 'user-bookmarks'
+  Map: Bookmarks,
+  List: Bookmarks.List,
+  name: 'bookmarks'
 });
 
-tag('user-bookmarks-model', userConnection);
+tag('bookmarks-model', userConnection);
 
-export default UserBookmarks;
+export default Bookmarks;
 
 

@@ -1,7 +1,7 @@
 
-{{#if userBookmarks.isResolved}}{{setDefaultGrid}}
+{{#if bookmarks.isResolved}}{{setDefaultGrid}}
 		<div class='gridTitle'>
-	{{#each userBookmarks.value}}
+	{{#each bookmarks.value}}
 		{{#each grids}}
 				<span class='gridButton {{#is refId visibleGridRefId}}highlight{{/is}}' ($click)='chooseGrid(refId)'>{{name}}</span>
 		{{/each}}
@@ -14,7 +14,7 @@
 		<can-import from="components/bookmarks/grid/grid"/>
 		<bookmarks-grid
 			root-vm='{.}'
-			user-bookmarks='{userBookmarks}'
+			bookmarks='{bookmarks}'
 			visible-grid-ref-id='{visibleGridRefId}'
 			edit-mode='{editMode}'
 		/>

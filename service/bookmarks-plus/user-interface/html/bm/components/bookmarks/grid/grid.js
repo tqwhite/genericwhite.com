@@ -48,7 +48,7 @@ export const viewModel = Map.extend({
 		console.dir({
 			"this": this.attr()
 		});
-		this.attr('userBookmarks').then((item)=>{
+		this.attr('bookmarks').then((item)=>{
 		
 console.dir({"item":item.attr()});
 
