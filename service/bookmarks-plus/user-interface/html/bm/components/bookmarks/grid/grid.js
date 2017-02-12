@@ -34,6 +34,7 @@ export const viewModel = Map.extend({
 	showGrid: function(gridElement, editMode) {
 		if (!this.gridManagerList[gridElement.refId]) {
 			this.gridManagerList[gridElement.refId] = new gridManager(gridElement, {
+				viewModel:this,
 				qtools: qtools,
 				Map: Map,
 				stache: stache

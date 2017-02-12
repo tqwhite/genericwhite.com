@@ -25,7 +25,24 @@ export const viewModel = Map.extend({
 		simpleMarks: {
 			type: "*"
 		},
-		visibleGridRefId: {},
+		visibleGridRefId: {
+		
+		get:function(value){
+			if (value){
+				return value;
+			}
+			this.attr('incomingParameters', qtools.getUriParameters(window.location.hash));
+
+console.dir({"this.attr('incomingParameters')":this.attr('incomingParameters').attr()});
+
+
+
+			if (this.attr('incomingParameters').targetGrid){
+				return this.attr('incomingParameters').targetGrid;
+			}
+		}
+		
+		},
 		dirtyGrid:{
 		
 		},
