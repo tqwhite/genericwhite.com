@@ -1,60 +1,57 @@
-import $ from 'can-jquery'; //looks for projects in node_modules
-import Component from 'can-component';
-import Map from 'can-map';
-import 'can-define';
-import stache from 'can-stache';
-import 'can-stache-bindings';
-import qtools from 'node_modules/qtools-minus/';
+import $ from "can-jquery";
+//looks for projects in node_modules
+import Component from "can-component";
+import Map from "can-map";
+import "can-define";
+import stache from "can-stache";
+import "can-stache-bindings";
+import qtools from "node_modules/qtools-minus/";
 
-import './grid.less';
-import template from './grid.stache!steal-stache';
+import "./grid.less";
+import template from "./grid.stache!steal-stache";
 
-import gridGenerator from 'node_modules/grid-manager/';
+import gridManager from "node_modules/grid-manager/";
 
 export const viewModel = Map.extend({
 	define: {
 		newMessage: {
-			value: 'hello',
+			value: "hello",
 			get: function(value) {
-				return value + '!';
+				return value + "!";
 			}
 		},
 		message: {
-			value: 'hello from bookmarks-grid'
+			value: "hello from bookmarks-grid"
 		},
 		dataIsResolved: {
 			value: false
 		}
 	},
 	getAnchor: function(position) {
-		return `${position.row} ${position.column}`
+		return `${position.row} ${position.column}`;
 	},
-
 	gridManagerList: {},
 	showGrid: function(gridElement, editMode) {
-
-	
 		if (!this.gridManagerList[gridElement.refId]) {
-			this.gridManagerList[gridElement.refId] = new gridGenerator(gridElement, {
-			qtools:qtools,
-			Map:Map,
-			stache:stache
+			this.gridManagerList[gridElement.refId] = new gridManager(gridElement, {
+				qtools: qtools,
+				Map: Map,
+				stache: stache
 			});
 		}
-		return this.gridManagerList[gridElement.refId].renderGrid('mainGrid', editMode)
+		return this.gridManagerList[gridElement.refId].renderGrid(
+			"mainGrid",
+			editMode
+		);
 	},
-
 	testElement: function() {
 		console.dir({
-			"this": this.attr()
+			this: this.attr()
 		});
-		this.attr('bookmarks').then((item)=>{
-		
-console.dir({"item":item.attr()});
-
-
+		this.attr("bookmarks").then(item => {
+			console.dir({ item: item.attr() });
 		});
-	},
+	}
 });
 
 Component.extend({
@@ -64,16 +61,19 @@ Component.extend({
 	events: {
 		click: function() {
 			this.viewModel.attr("visible", !this.viewModel.attr("visible"));
+		},
+		"input change": function(element, event) {
+			const visibleGridRefId = this.viewModel.attr("visibleGridRefId");
+			this.viewModel.gridManagerList[visibleGridRefId].applyEdit(element);
+			this.viewModel.attr('%root').attr('dirtyGrid', true);
 		}
 	},
 	helpers: {
 		testHelper: function(arg1, options) {
-
 			console.dir({
 				"testHelper.options": options.context.attr()
 			});
-			return 'testHelper ' + arg1;
-
+			return "testHelper " + arg1;
 		}
 	}
 });

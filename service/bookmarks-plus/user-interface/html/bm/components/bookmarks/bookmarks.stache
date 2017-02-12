@@ -1,21 +1,27 @@
+<can-import from="components/bookmarks/grid/grid"/>
 
-{{#if bookmarks.isResolved}}{{setDefaultGrid}}
-		<div class='gridTitle'>
-	{{#each bookmarks.value}}
-		{{#each grids}}
-				<span class='gridButton {{#is refId visibleGridRefId}}highlight{{/is}}' ($click)='chooseGrid(refId)'>{{name}}</span>
+{{#if bookmarks.isResolved}}
+
+	{{setDefaultGrid}}
+	
+	<div class='gridTitle'>
+		{{#each bookmarks.value}}
+			{{#each grids}}
+				<span class='gridButton {{#is refId visibleGridRefId}}highlight{{/is}}' ($click)='chooseGrid(refId)'>
+					{{name}}
+				</span>
+			{{/each}}
 		{{/each}}
-	{{/each}}
-	<span class='gridButton {{#editMode}}editorActive{{/editMode}}' ($click)='toggleEditMode()'>
-						{{^editMode}}Edit Bookmarks{{/editMode}}
-						{{#editMode}}Stop Editing{{/editMode}}
-						</span>
-		</div>
-		<can-import from="components/bookmarks/grid/grid"/>
-		<bookmarks-grid
-			root-vm='{.}'
-			bookmarks='{bookmarks}'
-			visible-grid-ref-id='{visibleGridRefId}'
-			edit-mode='{editMode}'
-		/>
+		<span class='gridButton {{#editMode}}editorActive{{/editMode}}' ($click)='toggleEditMode()'>
+			{{^editMode}}Edit Bookmarks{{/editMode}}
+			{{#editMode}}Stop Editing{{/editMode}}
+		</span>
+	</div>
+
+	<bookmarks-grid
+		root-vm='{.}'
+		bookmarks='{bookmarks}'
+		visible-grid-ref-id='{visibleGridRefId}'
+		edit-mode='{editMode}'
+	/>
 {{/if}}
