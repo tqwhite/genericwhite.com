@@ -96,6 +96,20 @@ var moduleFunction = function() {
 			});
 		});
 
+		const bookmarksNot = require('./bookmarks-not');
+		startList.push((done) => {
+			const workerName = 'bookmarksNot'
+			new bookmarksNot({
+				config: config,
+				apiManager: workerList.apiManager.init(workerName),
+				router: workerList.webInit.router,
+				permissionMaster: workerList.webInit.permissionMaster,
+				initCallback: function() {
+					workerList[workerName] = this; done();
+				}
+			});
+		});
+
 		async.series(startList, () => {
 			workerList.webInit.startServer();
 // 			workerList.apiManager.list('dispatch');

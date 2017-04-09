@@ -1,0 +1,30 @@
+<can-import from="components/bookmarks/grid/grid"/>
+<button ($click)='testElement("x")' style='margin-left:20px;' tabindex='-1'>test bookmarks</button>
+
+
+{{#if bookmarks.isResolved}}
+
+	{{setDefaultGrid}}
+	
+	<div class='gridTitle'>
+		{{#each bookmarks.value}}
+			{{#each grids}}
+				<span class='gridButton {{#is refId visibleGridRefId}}highlight{{/is}}' ($click)='chooseGrid(refId)'>
+					{{name}}
+				</span>
+			{{/each}}
+		{{/each}}
+		<span class='gridButton {{#editMode}}editorActive{{/editMode}}' ($click)='toggleEditMode()'>
+			{{^editMode}}Edit Bookmarks{{/editMode}}
+			{{#editMode}}Stop Editing{{/editMode}}
+		</span>
+	</div>
+
+	<bookmarks-grid
+		root-vm='{.}'
+		bookmarks='{bookmarks}'
+		simple-marks='{simpleMarks}'
+		visible-grid-ref-id='{visibleGridRefId}'
+		edit-mode='{editMode}'
+	/>
+{{/if}}

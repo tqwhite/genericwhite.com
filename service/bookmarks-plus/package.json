@@ -1,7 +1,7 @@
 {
   "name": "bookmarks-plus",
   "version": "1.0.0",
-  "description": "Bookmark manager with grid and other idiosyncrasies",
+  "description": "Bookmark manager with awesome properties",
   "main": "bookmarks-plus.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -1,0 +1,11 @@
+<button ($click)='testElement("x")' style='margin-left:20px;' tabindex='-1'>test bookmarks-grid</button>
+
+<div class='gridContainer'>
+	{{#each bookmarks.value}}
+		{{#each grids}}
+			{{#is refId visibleGridRefId}}
+				{{showGrid(., editMode)}}
+			{{/is}}
+		{{/each}}
+	{{/each}}
+</div>
