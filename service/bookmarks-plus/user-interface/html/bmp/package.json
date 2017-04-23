@@ -1,0 +1,12 @@
+{
+  "name": "bmp",
+  "version": "1.0.0",
+  "description": "Bookmarks Plus",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build/dev.js"
+  },
+  "author": "TQ White II",
+  "license": "ISC"
+}

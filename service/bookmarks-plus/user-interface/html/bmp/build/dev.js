@@ -1,72 +1,32 @@
-"use strict";
-const qtoolsGen = require("qtools");
+'use strict';
+const qtoolsGen = require('qtools');
 const qtools = new qtoolsGen(module);
-const async = require("async");
+const async = require('async');
 var express = require('express');
 
 const webpack = require('webpack');
-const webpackConfig = require('./webpack-config-dev.js');
-const webpackDevMiddleware = require("webpack-dev-middleware");
+const webpackDevMiddleware = require('webpack-dev-middleware');
 
-//START OF moduleFunction() ============================================================
+var configPath =
+	process.env.gwProjectPath + 'configs/instanceSpecific/webpack/compile.js';
 
-var moduleFunction = function(args) {
-	qtools.validateProperties({
-		subject: args || {},
-		targetScope: this, //will add listed items to targetScope
-		propList: [
-			{
-				name: "router",
-				optional: false
-			},
-			{
-				name: "permissionMaster",
-				optional: false
-			}
-		]
-	});
+const src = `${process.env.gwProjectPath}/code/service/bookmarks-plus/user-interface/html/bmp/src/`;
+const lib = `${process.env.gwProjectPath}/code/service/bookmarks-plus/user-interface/html/bmp/lib/`;
+const uiWebpackNodeModuleDir = `${process.env.gwProjectPath}/code/service/bookmarks-plus/user-interface/node_modules/`;
+const urlPrefix = '/bmp/lib/';
 
-	//LOCAL VARIABLES ====================================
-	
-	const moduleName = qtools.ping().employer;
+const webpackConfig = require(configPath)(
+	urlPrefix,
+	src,
+	lib,
+	uiWebpackNodeModuleDir
+);
 
-	//LOCAL FUNCTIONS ====================================
+webpack(webpackConfig, err => {
+	if (err) {
+		qtools.logError(err.toString() + '\n\n');
+		throw err;
+	}
 
-	//METHODS AND PROPERTIES ====================================
-	
-	this.objectAccess = (control, value) => {
-		switch (control) {
-			case "ping":
-				return `${moduleName} is alive`;
-				break;
-		}
-	};
-
-	this.shutdown = (message, callback) => {
-			console.log(`\nshutting down ${moduleName}`);
-			callback("", message);
-		};
-
-	//API ENDPOINTS ====================================
-
-	//INITIALIZATION ====================================
-
-
-	this.router.get(/\/bmp/, (req, res, next) => {
-		res.cookie('environment', qtools.getSurePath(this, 'config.system.environment'), { maxAge: 10000 });
-		next();
-	});
-	
-	this.permissionMaster.addRoute('get', new RegExp('/bmp/prohibited.html'), 'tq');
-	this.permissionMaster.addRoute('get', new RegExp('/bmp/*'), 'all');
-	this.router.use(express.static(require('path').parse(module.id).dir+'/html'));
-
-
-	return this;
-};
-
-//END OF moduleFunction() ============================================================
-
-module.exports = moduleFunction;
-//module.exports = new moduleFunction();
-
+	qtools.logMilestone('Webpack build is complete\n\n');
+});

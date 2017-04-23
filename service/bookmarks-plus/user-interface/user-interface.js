@@ -37,42 +37,19 @@ var moduleFunction = function(args) {
 			}
 		]
 	});
+	
+	
+	var configPath = process.env.gwProjectPath + 'configs/instanceSpecific/webpack/' + this.config.system.environment + '.js';
 
 	//LOCAL VARIABLES ====================================
 
 	const src = `${process.env.gwProjectPath}/code/service/bookmarks-plus/user-interface/html/bmp/src/`;
 	const lib = `${process.env.gwProjectPath}/code/service/bookmarks-plus/user-interface/html/bmp/lib/`;
+	const uiWebpackNodeModuleDir=`${process.env.gwProjectPath}/code/service/bookmarks-plus/user-interface/node_modules/`
+	const urlPrefix='/bmp/lib/'
 
-	const webpackConfig = {
-		entry: [path.join(__dirname, 'html/bmp/src/app.js')],
-		output: {
-			filename: 'bundle.js',
-			path: lib,
-			publicPath: '/bmp/lib/'
-		},
-		resolve: {
-			extensions: ['.js', '.vue', '.json'],
-			alias: {
-				vue$: 'vue/dist/vue.min.js',
-				'@': path.join(__dirname, 'html/bmp/src')
-			}
-		},
-		module: {
-			rules: [
-				{
-					test: /\.js$/,
-					exclude: /(node_modules|bower_components)/,
-					use: {
-						loader: `${process.env.gwProjectPath}/code/service/bookmarks-plus/user-interface/node_modules/babel-loader`,
-						options: {
-							presets: ['env']
-						}
-					}
-				}
-			]
-		}
-	};
-
+	const webpackConfig = require(configPath)(urlPrefix, src, lib, uiWebpackNodeModuleDir);
+	
 	//LOCAL FUNCTIONS ====================================
 
 	//METHODS AND PROPERTIES ====================================
@@ -85,20 +62,6 @@ var moduleFunction = function(args) {
 	);
 
 	//API ENDPOINTS ====================================
-	
-	this.router.get('/bmp/lib/bundle.js', function(req, res) {
-qtools.logDebug("req.url="+req.url);
-
-
-qtools.logDebug("compiler.outputFileSystem.readFileSync(req.url)="+compiler.outputFileSystem.readFileSync(req.url));
-
-
-qtools.die({"compiler.outputFileSystem.readFileSync(req.url)":compiler.outputFileSystem.readFileSync(req.url)});
-
-
-		res.write(compiler.outputFileSystem.readFileSync(req.url));
-		res.end();
-	});
 	
 	this.router.get(/\/bmp/, (req, res, next) => {
 		res.cookie(
