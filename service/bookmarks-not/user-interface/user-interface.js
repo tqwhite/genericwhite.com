@@ -118,13 +118,13 @@ var moduleFunction = function(args) {
 	//API ENDPOINTS ====================================
 
 	
-	this.router.get(/\/bnot/, (req, res, next) => {
+	this.router.get(/\/bmNot/, (req, res, next) => {
 		res.cookie('environment', qtools.getSurePath(this, 'config.system.environment'), { maxAge: 10000 });
 		next();
 	});
 	
-	this.permissionMaster.addRoute('get', new RegExp('/bnot/prohibited.html'), 'tq');
-	this.permissionMaster.addRoute('get', new RegExp('/bnot/*'), 'all');
+	this.permissionMaster.addRoute('get', new RegExp('/bmNot/prohibited.html'), 'tq');
+	this.permissionMaster.addRoute('get', new RegExp('/bmNot/*'), 'all');
 	this.router.use(express.static(require('path').parse(module.id).dir+'/html'));
 
 	//INITIALIZATION ====================================

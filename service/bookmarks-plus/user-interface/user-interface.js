@@ -3,11 +3,14 @@ const qtoolsGen = require('qtools');
 const qtools = new qtoolsGen(module);
 const async = require('async');
 var express = require('express');
+const path = require('path');
+
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
 
 //START OF moduleFunction() ============================================================
 
 var moduleFunction = function(args) {
-
 	qtools.validateProperties({
 		subject: args || {},
 		targetScope: this, //will add listed items to targetScope
@@ -37,99 +40,92 @@ var moduleFunction = function(args) {
 
 	//LOCAL VARIABLES ====================================
 
-	let workerList = {};
+	const src = `${process.env.gwProjectPath}/code/service/bookmarks-plus/user-interface/html/bmp/src/`;
+	const lib = `${process.env.gwProjectPath}/code/service/bookmarks-plus/user-interface/html/bmp/lib/`;
+
+	const webpackConfig = {
+		entry: [path.join(__dirname, 'html/bmp/src/app.js')],
+		output: {
+			filename: 'bundle.js',
+			path: lib,
+			publicPath: '/bmp/lib/'
+		},
+		resolve: {
+			extensions: ['.js', '.vue', '.json'],
+			alias: {
+				vue$: 'vue/dist/vue.min.js',
+				'@': path.join(__dirname, 'html/bmp/src')
+			}
+		},
+		module: {
+			rules: [
+				{
+					test: /\.js$/,
+					exclude: /(node_modules|bower_components)/,
+					use: {
+						loader: `${process.env.gwProjectPath}/code/service/bookmarks-plus/user-interface/node_modules/babel-loader`,
+						options: {
+							presets: ['env']
+						}
+					}
+				}
+			]
+		}
+	};
 
 	//LOCAL FUNCTIONS ====================================
 
-	const startSystem = () => {
-
-		if (typeof (COMPONENT) == 'undefined') {
-			//console.log("COMPONENT is undefined in" + __dirname)
-			this.initCallback && this.initCallback();
-			return;
-		}
-
-
-
-		const startList = [];
-
-
-		var COMPONENT = require('COMPONENT');
-		startList.push((done) => {
-			const workerName = 'COMPONENT_NAME'
-			new COMPONENT({
-				config: this.config,
-				apiManager: this.apiManager.init(workerName),
-				router: this.router,
-				permissionMaster: this.permissionMaster,
-				initCallback: function() {
-					workerList[workerName] = this; done();
-				}
-			});
-		});
-
-
-		async.series(startList, () => {
-			this.initCallback && this.initCallback();
-		});
-	};
-
 	//METHODS AND PROPERTIES ====================================
 
-	if (typeof (workerList) != 'object' || 'this object DOES NOT WANT to SHUT DOWN WORKERS') {
-		this.shutdown = (message, callback) => {
-			console.log(`\nshutting down ${__dirname}`);
-			callback('', message);
-		}
-	} else {
-		const buildShutdownList = (message) => {
-			const shutdownList = [];
-			for (var i in workerList) {
-				var worker = workerList[i];
-				shutdownList.push(
-					((i) => {
-						return (done) => {
-							workerList[i].shutdown(message, done)
-						}
-					})(i)
-				);
-			}
-			return shutdownList;
-		};
-
-		const cleanup = () => {
-			let nameString = '';
-			for (var i in workerList) {
-				workerList[i] = null;
-				nameString += `${i}, `;
-			}
-			qtools.message(`[${nameString.replace(/, $/, '')}] were flushed at ${Date.now()}`);
-			workerList = {};
-		}
-
-		this.shutdown = (message, callback) => {
-			async.parallel(buildShutdownList(message), () => {
-				cleanup();
-				callback('', message);
-			});
-		}
-	}
+	const compiler = webpack(webpackConfig);
+	this.router.use(
+		webpackDevMiddleware(compiler, {
+			publicPath: webpackConfig.output.publicPath
+		})
+	);
 
 	//API ENDPOINTS ====================================
-
 	
-	this.router.get(/\/bmp/, (req, res, next) => {
-		res.cookie('environment', qtools.getSurePath(this, 'config.system.environment'), { maxAge: 10000 });
-		next();
+	this.router.get('/bmp/lib/bundle.js', function(req, res) {
+qtools.logDebug("req.url="+req.url);
+
+
+qtools.logDebug("compiler.outputFileSystem.readFileSync(req.url)="+compiler.outputFileSystem.readFileSync(req.url));
+
+
+qtools.die({"compiler.outputFileSystem.readFileSync(req.url)":compiler.outputFileSystem.readFileSync(req.url)});
+
+
+		res.write(compiler.outputFileSystem.readFileSync(req.url));
+		res.end();
 	});
 	
-	this.permissionMaster.addRoute('get', new RegExp('/bmp/prohibited.html'), 'tq');
+	this.router.get(/\/bmp/, (req, res, next) => {
+		res.cookie(
+			'environment',
+			qtools.getSurePath(this, 'config.system.environment'),
+			{ maxAge: 10000 }
+		);
+		next();
+	});
+
+	this.permissionMaster.addRoute(
+		'get',
+		new RegExp('/bmp/prohibited.html'),
+		'tq'
+	);
 	this.permissionMaster.addRoute('get', new RegExp('/bmp/*'), 'all');
-	this.router.use(express.static(require('path').parse(module.id).dir+'/html'));
+	this.router.use(
+		express.static(require('path').parse(module.id).dir + '/html')
+	);
 
 	//INITIALIZATION ====================================
 
-	startSystem();
+	this.initCallback && this.initCallback();
+	this.shutdown = (message, callback) => {
+		console.log(`\nshutting down ${__dirname}`);
+		callback('', message);
+	};
 
 	return this;
 };
@@ -138,4 +134,3 @@ var moduleFunction = function(args) {
 
 module.exports = moduleFunction;
 //module.exports = new moduleFunction();
-

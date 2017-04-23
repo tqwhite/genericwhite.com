@@ -60,19 +60,19 @@ var moduleFunction = function(args) {
 // 		});
 // 
 // 
-// 		const ui = require('./user-interface');
-// 		startList.push((done) => {
-// 			const workerName = 'user-interface'
-// 			new ui({
-// 				config: this.config,
-// 				apiManager: this.apiManager.init(workerName),
-// 				router: this.router,
-// 				permissionMaster: this.permissionMaster,
-// 				initCallback: function() {
-// 					workerList[workerName] = this; done();
-// 				}
-// 			});
-// 		});
+		const ui = require('./user-interface');
+		startList.push((done) => {
+			const workerName = 'user-interface'
+			new ui({
+				config: this.config,
+				apiManager: this.apiManager.init(workerName),
+				router: this.router,
+				permissionMaster: this.permissionMaster,
+				initCallback: function() {
+					workerList[workerName] = this; done();
+				}
+			});
+		});
 
 console.log(`models are no longer being called from bookmarks-not.js\n`);
 

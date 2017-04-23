@@ -7,5 +7,16 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "TQ White II",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.4.0",
+    "webpack": "^2.4.1",
+    "webpack-dev-middleware": "^1.10.2"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "vue": "^2.2.6"
+  }
 }

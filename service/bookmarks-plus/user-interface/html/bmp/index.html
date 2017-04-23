@@ -3,17 +3,24 @@
 <head>
 	<META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=UTF-8'>
 	<title>Bookmarks Plus</title>
-	<script>
-	var environment='production';
-	if(document.cookie.match(/environment=development/)){
-		environment='development'; //anything else loads /dist compiled version
-	}
-	var lt='<';
-	var gt='>';
-	//document.write(lt+"script type='text/javascript' src='node_modules/steal/steal.js' env='"+environment+"' main='bookmarks-plus-ui/app'"+gt+lt+"/script"+gt);
-	</script>
 </head>
 <body>
-hello
+
+<div id='srcApp'> nothing from app.js</div>
+<div id="helloFromVue">
+  {{ message }}
+</div>
+
 </body>
+
+<script>
+		var lt='<';
+		var gt='>';
+	if(document.cookie.match(/environment=development/)){
+		document.write(lt+"script type='text/javascript' src='lib/bundle.js'"+gt+lt+"/script"+gt);
+	}
+	else{
+		document.write(lt+"script type='text/javascript' src='lib/bundle.js'"+gt+lt+"/script"+gt);
+	}
+</script>
 </html>
