@@ -99,7 +99,7 @@ document.getElementById('srcApp').innerHTML = getMessage2();
 var helloFromVue = new _vueMin2.default({
 		el: '#helloFromVue',
 		data: {
-				message: 'Hello from Vue!'
+				htmlMesssageVar: '\n\t\t\t\t\n<br/><br/><b>Hello from Vue!!</b><br/><br/>\nAs I turn my attention to the GE project, I remind myself of this:<br/><br/>\n1) The basic nodejs app for bookmarks plus works. It\'s file structure is\ncorrect. It correctly uses webpack to build the system and load both\nbabel and vue. The dev site compiles on every access. The demo site\nloads a built library file.\n<br/><br/>\n2) The next step is to initialize a Vue component system. Last time I tried,\nI was unable to access test.vue from app.js. I don\'t recall the error. Making\nit so that I can structure the app into files is job #1.\n<br/><br/>\n3) After that the rough sequence I imagine is connect to the API and then build a UI.\n<br/><br/>\n\n\n\n\n'
 		}
 });
 

@@ -37,32 +37,42 @@ var moduleFunction = function(args) {
 			}
 		]
 	});
-	
-	
-	var configPath = process.env.gwProjectPath + 'configs/instanceSpecific/webpack/' + this.config.system.environment + '.js';
+
+	var configPath =
+		process.env.gwProjectPath +
+		'configs/instanceSpecific/webpack/' +
+		this.config.system.environment +
+		'.js';
 
 	//LOCAL VARIABLES ====================================
 
 	const src = `${process.env.gwProjectPath}/code/service/bookmarks-plus/user-interface/html/bmp/src/`;
 	const lib = `${process.env.gwProjectPath}/code/service/bookmarks-plus/user-interface/html/bmp/lib/`;
-	const uiWebpackNodeModuleDir=`${process.env.gwProjectPath}/code/service/bookmarks-plus/user-interface/node_modules/`
-	const urlPrefix='/bmp/lib/'
+	const uiWebpackNodeModuleDir = `${process.env.gwProjectPath}/code/service/bookmarks-plus/user-interface/node_modules/`;
+	const urlPrefix = '/bmp/lib/';
 
-	const webpackConfig = require(configPath)(urlPrefix, src, lib, uiWebpackNodeModuleDir);
-	
+	const webpackConfig = require(configPath)(
+		urlPrefix,
+		src,
+		lib,
+		uiWebpackNodeModuleDir
+	);
+
 	//LOCAL FUNCTIONS ====================================
 
 	//METHODS AND PROPERTIES ====================================
 
-	const compiler = webpack(webpackConfig);
-	this.router.use(
-		webpackDevMiddleware(compiler, {
-			publicPath: webpackConfig.output.publicPath
-		})
-	);
+	if (this.config.system.environment == 'development') {
+		const compiler = webpack(webpackConfig);
+		this.router.use(
+			webpackDevMiddleware(compiler, {
+				publicPath: webpackConfig.output.publicPath
+			})
+		);
+	}
 
 	//API ENDPOINTS ====================================
-	
+
 	this.router.get(/\/bmp/, (req, res, next) => {
 		res.cookie(
 			'environment',

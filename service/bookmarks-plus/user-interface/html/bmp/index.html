@@ -7,8 +7,8 @@
 <body>
 
 <div id='srcApp'> nothing from app.js</div>
-<div id="helloFromVue">
-  {{ message }}
+<br/><br/>
+<div id="helloFromVue" v-html="htmlMesssageVar">
 </div>
 
 </body>
@@ -20,7 +20,7 @@
 		document.write(lt+"script type='text/javascript' src='lib/bundle.js'"+gt+lt+"/script"+gt);
 	}
 	else{
-		document.write(lt+"script type='text/javascript' src='lib/compiled.js'"+gt+lt+"/script"+gt);
+		document.write(lt+"script type='text/javascript' src='lib/bundle.js'"+gt+lt+"/script"+gt);
 	}
 </script>
 </html>
